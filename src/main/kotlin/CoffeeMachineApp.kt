@@ -5,15 +5,17 @@ var amountOfCups = 9
 var amountOfMoney = 550
 
 fun printState() {
-    println("""
-The coffee machine has:
-$amountOfWater ml of water
-$amountOfMilk ml of milk
-$amountOfCoffee g of coffee beans
-$amountOfCups disposable cups
-$$amountOfMoney of money
-"""
-)
+    val standardInputTemplate = """
+        The coffee machine has:
+        $amountOfWater ml of water
+        $amountOfMilk ml of milk
+        $amountOfCoffee g of coffee beans
+        $amountOfCups disposable cups
+        $$amountOfMoney of money
+        
+        """.trimIndent()
+
+    println(standardInputTemplate)
 }
 
 fun prepareCoffee() {
@@ -25,6 +27,7 @@ fun prepareCoffee() {
         3 -> makeCappuccino()
     }
     amountOfCups -= 1
+    println()
 }
 
 fun makeEspresso() {
@@ -59,10 +62,12 @@ fun replenishMachine() {
 
     print("Write how many disposable cups of coffee do you want to add: ")
     amountOfCups += readln().toInt()
+
+    println()
 }
 
 fun retrieveCash() {
-    println("I gave you $$amountOfMoney")
+    println("I gave you $$amountOfMoney\n")
     amountOfMoney = 0
 }
 
