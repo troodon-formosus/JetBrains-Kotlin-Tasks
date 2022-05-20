@@ -16,6 +16,37 @@ $$amountOfMoney of money
 )
 }
 
+fun prepareCoffee() {
+    print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: ")
+    val userChoice = readln().toInt()
+    when (userChoice) {
+        1 -> makeEspresso()
+        2 -> makeLatte()
+        3 -> makeCappuccino()
+    }
+    amountOfCups -= 1
+}
+
+fun makeEspresso() {
+    amountOfWater -= 250
+    amountOfCoffee -= 16
+    amountOfMoney += 4
+}
+
+fun makeLatte() {
+    amountOfWater -= 350
+    amountOfMilk -= 75
+    amountOfCoffee -= 20
+    amountOfMoney += 7
+}
+
+fun makeCappuccino() {
+    amountOfWater -= 200
+    amountOfMilk -= 100
+    amountOfCoffee -= 12
+    amountOfMoney += 6
+}
+
 fun replenishMachine() {
     print("Write how many ml of water do you want to add: ")
     amountOfWater += readln().toInt()
@@ -41,7 +72,7 @@ fun main() {
     print("Write action (buy, fill, take): ")
     val userInput = readln()
     when (userInput) {
-        "buy" -> println("")
+        "buy" -> prepareCoffee()
         "fill" -> replenishMachine()
         "take" -> retrieveCash()
     }
