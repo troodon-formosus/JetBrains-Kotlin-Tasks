@@ -1,7 +1,7 @@
 var amountOfWater = 400
 var amountOfMilk = 540
 var amountOfCoffee = 120
-var amountOfCup = 9
+var amountOfCups = 9
 var amountOfMoney = 550
 
 fun printState() {
@@ -10,10 +10,24 @@ The coffee machine has:
 $amountOfWater ml of water
 $amountOfMilk ml of milk
 $amountOfCoffee g of coffee beans
-$amountOfCup disposable cups
+$amountOfCups disposable cups
 $$amountOfMoney of money
 """
 )
+}
+
+fun replenishMachine() {
+    print("Write how many ml of water do you want to add: ")
+    amountOfWater += readln().toInt()
+
+    print("Write how many ml of milk do you want to add: ")
+    amountOfMilk += readln().toInt()
+
+    print("Write how many grams of coffee beans do you want to add: ")
+    amountOfCoffee += readln().toInt()
+
+    print("Write how many disposable cups of coffee do you want to add: ")
+    amountOfCups += readln().toInt()
 }
 
 fun retrieveCash() {
@@ -24,11 +38,11 @@ fun retrieveCash() {
 fun main() {
     printState()
 
-    println("Write action (buy, fill, take):")
+    print("Write action (buy, fill, take): ")
     val userInput = readln()
     when (userInput) {
         "buy" -> println("")
-        "fill" -> println("")
+        "fill" -> replenishMachine()
         "take" -> retrieveCash()
     }
 
