@@ -72,15 +72,14 @@ fun retrieveCash() {
 }
 
 fun main() {
-    printState()
-
-    print("Write action (buy, fill, take): ")
-    val userInput = readln()
-    when (userInput) {
-        "buy" -> prepareCoffee()
-        "fill" -> replenishMachine()
-        "take" -> retrieveCash()
-    }
-
-    printState()
+    do {
+        print("Write action (buy, fill, take, remaining, exit): ")
+        val userInput = readln()
+        when (userInput) {
+            "buy" -> prepareCoffee()
+            "fill" -> replenishMachine()
+            "take" -> retrieveCash()
+            "remaining" -> printState()
+        }
+    } while (userInput != "exit")
 }
