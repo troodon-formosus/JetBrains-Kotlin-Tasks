@@ -19,9 +19,11 @@ fun printState() {
 }
 
 fun prepareCoffee() {
-    print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: ")
-    val userChoice = readln().toInt()
-    when (userChoice) {
+    print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu: ")
+    val userChoice = readln()
+    if (userChoice == "back") return
+
+    when (userChoice.toInt()) {
         1 -> makeEspresso()
         2 -> makeLatte()
         3 -> makeCappuccino()
