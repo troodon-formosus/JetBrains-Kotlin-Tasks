@@ -4,6 +4,71 @@ var amountOfCoffee = 120
 var amountOfCups = 9
 var amountOfMoney = 550
 
+enum class CoffeeMachineState {
+    MAIN_MENU,
+    BUY,
+    FILL,
+}
+
+enum class CoffeeMachineFillingSubstance {
+    WATER,
+    MILK,
+    COFFEE,
+    CUPS,
+}
+
+class CoffeeMachine() {
+    var currentState = CoffeeMachineState.MAIN_MENU
+    var fillingSubstance = CoffeeMachineFillingSubstance.WATER
+    fun processUserInput(input: String) {
+        when (currentState) {
+            CoffeeMachineState.MAIN_MENU -> handleMainMenu(input)
+            CoffeeMachineState.BUY -> handleBuy(input)
+            CoffeeMachineState.FILL -> handleFill(input)
+        }
+    }
+
+    fun handleMainMenu(input: String) {
+        when (input) {
+            "buy" -> currentState = CoffeeMachineState.BUY
+            "fill" -> currentState = CoffeeMachineState.FILL
+            "take" -> retrieveCash()
+            "remaining" -> printState()
+        }
+    }
+    fun handleBuy(input: String) {
+        currentState = CoffeeMachineState.MAIN_MENU
+
+        if (input == "back") return
+        when (input) {
+            "1" -> makeEspresso()
+            "2" -> makeLatte()
+            "3" -> makeCappuccino()
+        }
+    }
+
+    fun handleFill(input: String) {
+        when (fillingSubstance) {
+            CoffeeMachineFillingSubstance.WATER -> {
+                amountOfWater += input.toInt()
+                fillingSubstance = CoffeeMachineFillingSubstance.MILK
+            }
+            CoffeeMachineFillingSubstance.MILK -> {
+                amountOfMilk += input.toInt()
+                fillingSubstance = CoffeeMachineFillingSubstance.COFFEE
+            }
+            CoffeeMachineFillingSubstance.COFFEE -> {
+                amountOfCoffee += input.toInt()
+                fillingSubstance = CoffeeMachineFillingSubstance.CUPS
+            }
+            CoffeeMachineFillingSubstance.CUPS -> {
+                amountOfCups += input.toInt()
+                fillingSubstance = CoffeeMachineFillingSubstance.WATER
+                currentState = CoffeeMachineState.MAIN_MENU
+            }
+        }
+    }
+}
 fun printState() {
     val standardInputTemplate = """
         The coffee machine has:
@@ -105,14 +170,10 @@ fun retrieveCash() {
 }
 
 fun main() {
+    val coffeeMachine = CoffeeMachine()
     do {
         print("Write action (buy, fill, take, remaining, exit): ")
         val userInput = readln()
-        when (userInput) {
-            "buy" -> prepareCoffee()
-            "fill" -> replenishMachine()
-            "take" -> retrieveCash()
-            "remaining" -> printState()
-        }
+        coffeeMachine.processUserInput(userInput)
     } while (userInput != "exit")
 }
