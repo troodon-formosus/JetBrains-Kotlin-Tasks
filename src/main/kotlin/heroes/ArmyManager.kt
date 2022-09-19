@@ -10,9 +10,6 @@ data class Stack private constructor(val quantity: Int, val name: String) {
 }
 
 class Army private constructor(val stacks: Array<Stack?>) {
-
-    //val stacks = Array<Stack?>(7) { null }
-
     companion object {
         fun ofStacks(vararg initialStacks: Stack): Army {
             if (initialStacks.size > 7) throw IllegalArgumentException("No more than 7 stacks are allowed!")
@@ -26,9 +23,12 @@ class Army private constructor(val stacks: Array<Stack?>) {
 }
 
 interface ArmyManager {
-    fun tryInsertOrMergeStack(stack: Stack, army: Army)
+    fun tryInsertOrMergeStack(stack: Stack, army: Army): Army
 }
 
-class ArmyManagerImpl () {
+class ArmyManagerImpl: ArmyManager {
+    override fun tryInsertOrMergeStack(stack: Stack, army: Army): Army {
+        TODO("Not yet implemented")
+    }
 
 }

@@ -58,7 +58,22 @@ class ArmyManagerTest {
     }
 
 
-//    fun tryInsertAndMergeTest() {
-//        val gremlinStack = Stack(50, "Gremlins")
-//    }
+    @Test
+    fun tryInsertAndMergeTest() {
+        val gremlinStack = Stack.of(50, "Gremlins")
+        val army = Army.ofStacks(
+            Stack.of(120, "Gremlins")
+        )
+        val armyManager = ArmyManagerImpl()
+        val armyAfterMerge = armyManager.tryInsertOrMergeStack(gremlinStack, army)
+        assertThat(armyAfterMerge.stacks).isEqualTo(arrayOf(
+            Stack.of(170, "Gremlins"),
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+        ))
+    }
 }
